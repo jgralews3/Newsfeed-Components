@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Added Article',
+    date: 'June 9th, 2020',
+    firstParagraph: 'This is the first paragraph',
+    secondParagraph: 'This is the second paragraph',
+    thirdParagraph: 'This is the third paragraph'
   }
 ];
 
@@ -111,3 +118,47 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+function articleMaker (title, date, firstParagraph, secondParagraph, thirdParagraph){
+  let article = document.createElement ('div');
+  let titleText = document.createElement ('h2');
+  let dateText = document.createElement ('p');
+  let articleText = document.createElement ('div');
+  let p1 = document.createElement ('p');
+  let p2 = document.createElement ('p');
+  let p3 = document.createElement ('p');
+  let button = document.createElement ('span');
+  let readButton = document.createElement ('button');
+
+  titleText.textContent = title;
+  dateText.textContent = date;
+  p1.textContent = firstParagraph;
+  p2.textContent = secondParagraph;
+  p3.textContent = thirdParagraph;
+  button.textContent = 'More/Less';
+  readButton.textContent = 'Remove Article';
+
+  article.classList.add ('article');
+  button.classList.add ('expandButton');
+  dateText.classList.add ('date');
+  
+  article.appendChild (titleText);
+  article.appendChild (dateText);
+  article.appendChild (articleText);
+  articleText.appendChild (p1);
+  articleText.appendChild (p2);
+  articleText.appendChild (p3);
+  articleText.appendChild (readButton);
+  article.appendChild (button);
+
+  button.addEventListener ('click', ()=> {article.classList.toggle('article-open')});
+  readButton.addEventListener ('click', ()=> {article.style.display = "none";})
+  return article;
+}
+
+const articleContainer = document.querySelector ('.articles');
+
+data.forEach ((obj)=> {
+ articleContainer.appendChild (articleMaker (obj.title, obj.date, obj.firstParagraph, obj.secondParagraph, obj.thirdParagraph))
+});
+
